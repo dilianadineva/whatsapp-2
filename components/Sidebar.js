@@ -6,7 +6,7 @@ import { Button, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import * as EmailValidator from 'email-validator'
 
-function Sidebar() {
+const Sidebar = () => {
 
     const createChat = () => {
         const input = prompt('Enter an email for the user you want to chat with')
@@ -20,6 +20,7 @@ function Sidebar() {
 
     return (
         <Container>
+           
             <Header>
                 <UserAvatar />
                 <IconsContainer>
@@ -35,7 +36,6 @@ function Sidebar() {
                 <SearchIcon />
                 <SearchInput/>
                 <SidebarButton onClick={createChat}>Start a new chat</SidebarButton>
-
                 {/* List of chats */}
             </Search>
 
