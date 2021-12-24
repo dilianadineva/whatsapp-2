@@ -1,50 +1,48 @@
-import '../styles/globals.css'
-import {db, auth} from '../firebase'
-import { useAuthState } from 'react-firebase-hooks/auth';
-import Login from '../components/Login';
-import Loading from '../components/Loading';
-import { useEffect } from 'react';
-import { collection, doc, setDoc, Timestamp } from "firebase/firestore"; 
-
+import "../styles/globals.css"
+import { db, auth } from "../firebase"
+import { useAuthState } from "react-firebase-hooks/auth"
+import Login from "../components/Login"
+import Loading from "../components/Loading"
+import { useEffect } from "react"
+import { collection, doc, setDoc, serverTimestamp } from "firebase/firestore"
 
 const MyApp = ({ Component, pageProps }) => {
-  const [user, loading] = useAuthState(auth); //a real time listener function
-  const usersCollectionRef = collection(db, "users")
-  
-  // useEffect(() => {
-  //   const setSmth = async () => {
-  //     console.log("db", db)
-  //     await setDoc(doc(db, "cities", "LA"), {
-  //       name: "Los Angeles",
-  //       state: "CA",
-  //       country: "USA"
-  //     });
-  //   }
-  //   setSmth()
-  // }, [])
+	const [user, loading] = useAuthState(auth) //a real time listener function
+	const usersCollectionRef = collection(db, "users")
 
-  useEffect(() => {
+	// useEffect(() => {
+	//   const setSmth = async () => {
+	//     console.log("db", db)
+	//     await setDoc(doc(db, "cities", "LA"), {
+	//       name: "Los Angeles",
+	//       state: "CA",
+	//       country: "USA"
+	//     });
+	//   }
+	//   setSmth()
+	// }, [])
 
-    const setUser = async (user) => {
+	useEffect(() => {
+		const setUser = async (user) => {
+			await setDoc(
+				doc(db, "users", user.email),
+				{
+					email: user.email,
+					lastSeen: serverTimestamp(),
+					photoURL: user.photoURL,
+				},
+				{ merge: true }
+			)
+		}
+		if (user) {
+			setUser(user)
+		}
+	}, [user]) //when user logs in or logs out
 
-      await setDoc(doc(db, "users", user.email), {
-        email: user.email,
-        // lastSeen: ,
-        photoURL: user.photoURL
-      });
-    }
-    if (user) {
-      console.log("user true")
-      setUser(user)
-    }
+	if (loading) return <Loading />
+	if (!user) return <Login />
 
-
-  }, [user]) //when user logs in or logs out
-
-  if(loading) return (<Loading />)
-  if(!user) return (<Login />)
-
-  return (<Component {...pageProps} />)
+	return <Component {...pageProps} />
 }
 
 export default MyApp
