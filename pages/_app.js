@@ -10,18 +10,6 @@ const MyApp = ({ Component, pageProps }) => {
 	const [user, loading] = useAuthState(auth) //a real time listener function
 	const usersCollectionRef = collection(db, "users")
 
-	// useEffect(() => {
-	//   const setSmth = async () => {
-	//     console.log("db", db)
-	//     await setDoc(doc(db, "cities", "LA"), {
-	//       name: "Los Angeles",
-	//       state: "CA",
-	//       country: "USA"
-	//     });
-	//   }
-	//   setSmth()
-	// }, [])
-
 	useEffect(() => {
 		const setUser = async (user) => {
 			await setDoc(
