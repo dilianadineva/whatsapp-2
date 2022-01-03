@@ -8,7 +8,7 @@ import * as EmailValidator from "email-validator"
 import { db, auth } from "../firebase"
 import { signOut } from "firebase/auth"
 import { collection, query, where, addDoc, onSnapshot, doc, getDocs} from "firebase/firestore"
-import { useAuthState, useCollection } from "react-firebase-hooks/auth"
+import { useAuthState } from "react-firebase-hooks/auth"
 import { useState } from "react"
 import { useEffect } from "react"
 import Chat from "./Chat"
@@ -73,15 +73,19 @@ const Sidebar = () => {
 	return (
 		<Container>
 			<Header>
-				<UserAvatar src={user?.photoURL}
-					onClick={() => {
-						signOut(auth)
-							.then(() => {})
-							.catch((error) => {
-								console.log("error sign out")
-							})
-					}}
-				/>
+				<UserEl>
+					<UserAvatar src={user?.photoURL}
+						onClick={() => {
+							signOut(auth)
+								.then(() => {})
+								.catch((error) => {
+									console.log("error sign out")
+								})
+						}}
+					/>	
+					<Logout>logout</Logout>
+				</UserEl>
+				
 				<IconsContainer>
 					<IconButton>
 						<ChatIcon />
@@ -160,4 +164,13 @@ const UserAvatar = styled(Avatar)`
 	:hover {
 		opacity: 0.8;
 	}
+`
+
+const UserEl=styled.div``
+const Logout=styled.div`
+	display: block;
+	visibility: hidden;
+	${UserEl}:hover & {
+    visibility: visible;
+  }
 `

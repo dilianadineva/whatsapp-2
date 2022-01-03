@@ -9,6 +9,7 @@ import { auth, db } from '../../firebase'
 import getRecipientEmail from '../../utils/getRecipientEmail'
 
 function Chat({chat, serversideMessages}) {
+    console.log("ID")
     const [user] = useAuthState(auth)
     
     return (

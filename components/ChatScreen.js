@@ -9,7 +9,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import MicIcon from '@mui/icons-material/Mic';
 import { collection, query, where, getDocs, orderBy, doc, addDoc, setDoc, serverTimestamp } from "firebase/firestore"
-// import { useCollection } from "react-firebase-hooks/auth"
 import getRecipientEmail from '../utils/getRecipientEmail'
 import { useEffect, useState, useRef } from 'react'
 import Message from './Message'

@@ -10,14 +10,11 @@ function Message({user, message}) {
 
     return (
         <Container>
-            {/* {user} */}
-            {/* {JSON.stringify(message)} */}
             <TypeOfMessage>
                 {message.message}
                 <Timestamp>
                 {message.timestamp ? moment(message.timestamp).format('LT') : "..."}
                 </Timestamp>
-                
             </TypeOfMessage>
         </Container>
     )
