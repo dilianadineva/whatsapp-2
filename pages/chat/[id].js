@@ -32,18 +32,21 @@ export async function getServerSideProps(context){ //context allows to get param
     // const chatRef = doc(db, "chats", context.query.id);
     // const chatRes = await getDoc(chatRef)
     // console.log(chatRes)
+    if(context.query.id){
     const chatSnaphot = doc(db, "chats", context.query.id);
     const messagesRef = collection(chatSnaphot, "messages")
     const messagesQuery = query(messagesRef, orderBy("timestamp", "asc"));
     const messages = await getDocs(messagesQuery)
-
-    const messagesArray = []
-    if(messages){
-        messages.forEach(message => {
-            messagesArray.push(message.data())
-        })
-        console.log("server side messagesArray: ", messagesArray)
     }
+    
+
+    // const messagesArray = []
+    // if(messages){
+    //     messages.forEach(message => {
+    //         messagesArray.push(message.data())
+    //     })
+    //     console.log("server side messagesArray: ", messagesArray)
+    // }
 
     // const chat = {
     //     id:  chatRes.id,
