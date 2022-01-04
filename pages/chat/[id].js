@@ -9,6 +9,7 @@ import { auth, db } from '../../firebase'
 import getRecipientEmail from '../../utils/getRecipientEmail'
 
 function Chat({chat, serversideMessages}) {
+    console.log("serversideMessages: ", serversideMessages)
     const [user] = useAuthState(auth)
     
     return (
@@ -28,8 +29,7 @@ export default Chat
 
 export async function getServerSideProps(context){ //context allows to get params of the url
     //all of this is happening on the server
-    // const [user] = useAuthState(auth)
-    // const chatRef = doc(db, "chats", context.query.id);
+    const chatRef = doc(db, "chats", context.query.id);
     // const chatRes = await getDoc(chatRef)
     // const chatSnaphot = doc(db, "chats", context.query.id);
     // const messagesRef = collection(chatSnaphot, "messages")
@@ -48,7 +48,8 @@ export async function getServerSideProps(context){ //context allows to get param
     //     id:  chatRes.id,
     //     ...chatRes.data()
     // }
-    return { props: { serversideMessages: {}, chat: {}} }
+    // return { props: { serversideMessages: JSON.stringify(messagesArray), chat: chat} }
+    return { props: { chatRef } }
 
 }
 

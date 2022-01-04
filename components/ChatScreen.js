@@ -26,7 +26,7 @@ function ChatScreen({chat, serversideMessages}) {
         const chatsRef = collection(db, "users") 
         const recipientQuery = query(chatsRef, where ("email", "==", getRecipientEmail(chat.users, user)));
         const recipientSnapshot = await getDocs(recipientQuery)
-        console.log("Recipient stuff: ", getRecipientEmail(chat.users, user), recipientSnapshot?.docs?.[0]?.data())
+        // console.log("Recipient stuff: ", getRecipientEmail(chat.users, user), recipientSnapshot?.docs?.[0]?.data())
         setRecipient(recipientSnapshot?.docs?.[0]?.data())
         return recipientSnapshot
     }
@@ -44,7 +44,7 @@ function ChatScreen({chat, serversideMessages}) {
             messagesSnapshot.forEach(message => {
                 messagesArray.push(message.data())
             })
-            console.log("messagesArray: ", messagesArray)
+            // console.log("messagesArray: ", messagesArray)
             setMessages(messagesArray)
         }else{ //get the server side rendered content, fis, above
             console.log("ssr")
@@ -52,7 +52,7 @@ function ChatScreen({chat, serversideMessages}) {
             serversideMessages.forEach(message => {
                 messagesArray.push(message.data())
             })
-            console.log("servr messagesArray: ", messagesArray)
+            // console.log("servr messagesArray: ", messagesArray)
             setMessages(messagesArray)
         }
         scrollToBottom()

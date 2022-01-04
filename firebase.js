@@ -24,10 +24,10 @@ const db = getFirestore(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-import { collection, doc, getDoc, getDocs, query, orderBy } from 'firebase/firestore'
+// import { collection, doc, getDoc, getDocs, query, orderBy } from 'firebase/firestore'
 
 export {
     db,
     auth,
-    provider,collection, doc, getDoc, getDocs, query, orderBy
+    // provider,collection, doc, getDoc, getDocs, query, orderBy
 }
