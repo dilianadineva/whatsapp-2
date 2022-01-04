@@ -34,9 +34,9 @@ export async function getServerSideProps(context){ //context allows to get param
     // console.log(chatRes)
     if(context.query.id){
     const chatSnaphot = doc(db, "chats", context.query.id);
-    const messagesRef = collection(chatSnaphot, "messages")
-    const messagesQuery = query(messagesRef, orderBy("timestamp", "asc"));
-    const messages = await getDocs(messagesQuery)
+    // const messagesRef = collection(chatSnaphot, "messages")
+    // const messagesQuery = query(messagesRef, orderBy("timestamp", "asc"));
+    // const messages = await getDocs(messagesQuery)
     }
     
 
