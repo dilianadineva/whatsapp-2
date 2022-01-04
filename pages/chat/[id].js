@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, orderBy } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, query, orderBy } from '@firebase/firestore'
 import Head from 'next/head'
 import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
