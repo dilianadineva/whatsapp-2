@@ -14,7 +14,7 @@ import { useEffect, useState, useRef } from 'react'
 import Message from './Message'
 import TimeAgo from "timeago-react"
 
-function ChatScreen({chat, serversideMessages}) {
+function ChatScreen({chat, messages}) {
     const router = useRouter() 
     const [user] = useAuthState(auth)
     const [input, setInput] = useState("")
@@ -46,15 +46,16 @@ function ChatScreen({chat, serversideMessages}) {
             })
             // console.log("messagesArray: ", messagesArray)
             setMessages(messagesArray)
-        }else{ //get the server side rendered content, fis, above
-            console.log("ssr")
-            serversideMessages
-            serversideMessages.forEach(message => {
-                messagesArray.push(message.data())
-            })
-            // console.log("servr messagesArray: ", messagesArray)
-            setMessages(messagesArray)
         }
+        // else{ //get the server side rendered content, fis, above
+        //     console.log("ssr")
+        //     serversideMessages
+        //     serversideMessages.forEach(message => {
+        //         messagesArray.push(message.data())
+        //     })
+        //     // console.log("servr messagesArray: ", messagesArray)
+        //     setMessages(messagesArray)
+        // }
         scrollToBottom()
     }
 
