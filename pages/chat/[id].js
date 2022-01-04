@@ -8,8 +8,8 @@ import Sidebar from '../../components/Sidebar'
 import { auth, db } from '../../firebase'
 import getRecipientEmail from '../../utils/getRecipientEmail'
 
-function Chat({chat, serversideMessages}) {
-    console.log("ID")
+function Chat({chat, serversideMessages, id}) {
+    console.log("ID: ", id)
     const [user] = useAuthState(auth)
     
     return (
@@ -50,7 +50,7 @@ export async function getServerSideProps(context){ //context allows to get param
     //     ...chatRes.data()
     // }
     // return { props: { serversideMessages: JSON.stringify(messagesArray), chat: chat} }
-    return { props: { serversideMessages: "", chat: "chat"} }
+    return { props: { serversideMessages: "", chat: "chat", id: context.query.id} }
 
 }
 
