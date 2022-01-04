@@ -8,8 +8,8 @@ import Sidebar from '../../components/Sidebar'
 import { auth, db } from '../../firebase'
 import getRecipientEmail from '../../utils/getRecipientEmail'
 
-function Chat({chat, serversideMessages}) {
-    console.log("serversideMessages: ", serversideMessages)
+function Chat({chatRef}) {
+    console.log("serversideMessages: ", chatRef)
     const [user] = useAuthState(auth)
     
     return (
