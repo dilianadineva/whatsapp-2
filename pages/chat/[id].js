@@ -8,8 +8,7 @@ import Sidebar from '../../components/Sidebar'
 import { auth, db } from '../../firebase'
 import getRecipientEmail from '../../utils/getRecipientEmail'
 
-function Chat({messagesRef}) {
-    console.log("serversideMessages: ", messagesRef)
+function Chat({chat, serversideMessages}) {
     const [user] = useAuthState(auth)
     
     return (
@@ -29,27 +28,26 @@ export default Chat
 
 export async function getServerSideProps(context){ //context allows to get params of the url
     //all of this is happening on the server
-    // const chatRef = doc(db, "chats", context.query.id);
-    // const chatRes = await getDoc(chatRef)
+    const chatRef = doc(db, "chats", context.query.id);
+    const chatRes = await getDoc(chatRef)
     const chatSnaphot = doc(db, "chats", context.query.id);
     const messagesRef = collection(chatSnaphot, "messages")
-    // const messagesQuery = query(messagesRef, orderBy("timestamp", "asc"));
-    // const messages = await getDocs(messagesQuery)
+    const messagesQuery = query(messagesRef, orderBy("timestamp", "asc"));
+    const messages = await getDocs(messagesQuery)
 
-    // const messagesArray = []
-    // if(messages){
-    //     messages.forEach(message => {
-    //         messagesArray.push(message.data())
-    //     })
-    //     console.log("server side messagesArray: ", messagesArray)
-    // }
+    const messagesArray = []
+    if(messages){
+        messages.forEach(message => {
+            messagesArray.push(message.data())
+        })
+        console.log("server side messagesArray: ", messagesArray)
+    }
 
-    // const chat = {
-    //     id:  chatRes.id,
-    //     ...chatRes.data()
-    // }
-    // return { props: { serversideMessages: JSON.stringify(messagesArray), chat: chat} }
-    return { props: { messagesRef } }
+    const chat = {
+        id:  chatRes.id,
+        ...chatRes.data()
+    }
+    return { props: { serversideMessages: JSON.stringify(messagesArray), chat: chat} }
 
 }
 
