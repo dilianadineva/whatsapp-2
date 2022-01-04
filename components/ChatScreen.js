@@ -14,7 +14,7 @@ import { useEffect, useState, useRef } from 'react'
 import Message from './Message'
 import TimeAgo from "timeago-react"
 
-function ChatScreen({chat, messages}) {
+function ChatScreen({chat, chatmessages}) {
     const router = useRouter() 
     const [user] = useAuthState(auth)
     const [input, setInput] = useState("")
